@@ -1,14 +1,12 @@
-import { useEffect, useState } from "react";
+import { useQuery } from "@tanstack/react-query";
 import "./List.css";
 
 export const List = () => {
-  const [people, setPeople] = useState([]);
-
-  useEffect(() => {
-    fetch("http://localhost:3000/people")
-      .then((res) => res.json())
-      .then((res) => setPeople(res));
-  }, []);
+  const { data: people } = useQuery({
+    queryFn: () =>
+      fetch("http://localhost:3000/people").then((res) => res.json()),
+    queryKey: ["people"],
+  });
 
   return (
     <ul>
