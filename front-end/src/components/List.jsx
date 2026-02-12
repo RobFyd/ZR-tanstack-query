@@ -1,12 +1,8 @@
-import { useQuery } from "@tanstack/react-query";
 import "./List.css";
+import { usePeopleQuery } from "../hooks/usePeopleQuery";
 
 export const List = () => {
-  const { data: people } = useQuery({
-    queryFn: () =>
-      fetch("http://localhost:3000/people").then((res) => res.json()),
-    queryKey: ["people"],
-  });
+  const { data: people } = usePeopleQuery();
 
   return (
     <ul>
