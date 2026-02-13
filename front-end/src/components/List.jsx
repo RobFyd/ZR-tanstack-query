@@ -3,7 +3,11 @@ import "./List.css";
 import { peopleQueryOptions } from "../queries/peopleQueryOptions";
 
 export const List = () => {
-  const { data: people } = useQuery(peopleQueryOptions);
+  const { data: people, isPending } = useQuery(peopleQueryOptions);
+
+  if (isPending) {
+    return <p>Ładowanie...</p>;
+  }
 
   return (
     <ul>
