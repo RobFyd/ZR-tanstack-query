@@ -4,6 +4,4 @@ export const peopleQueryOptions = queryOptions({
   queryFn: () =>
     fetch("http://localhost:3001/people").then((res) => res.json()),
   queryKey: ["people"],
-  retry: 5,
-  retryDelay: 1000,
 });
