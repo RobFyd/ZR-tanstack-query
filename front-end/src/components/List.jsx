@@ -3,7 +3,11 @@ import "./List.css";
 import { peopleQueryOptions } from "../queries/peopleQueryOptions";
 
 export const List = () => {
-  const { data: people, isPending } = useQuery(peopleQueryOptions);
+  const { data: people, isPending, isError } = useQuery(peopleQueryOptions);
+
+  if (isError) {
+    return <p>Wystąpił błąd podczas pobierania danych.</p>;
+  }
 
   if (isPending) {
     return <p>Ładowanie...</p>;
