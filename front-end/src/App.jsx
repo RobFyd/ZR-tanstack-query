@@ -13,7 +13,9 @@ function App() {
       <Header />
       <Form />
       <List onPersonSelect={setActivePersonId} />
-      {activePersonId !== null && <Detail />}
+      {activePersonId !== null && (
+        <Detail onClose={() => setActivePersonId(null)} />
+      )}
     </div>
   );
 }
