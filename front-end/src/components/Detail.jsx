@@ -1,12 +1,22 @@
+import { useQuery } from "@tanstack/react-query";
 import "./Detail.css";
 
-export function Detail({ onClose }) {
-    return (
-        <div className="detail">
-            <button onClick={onClose} type="button">
-                X
-            </button>
-            <h2>Informacje:</h2>
-        </div>
-    );
+export function Detail({ onClose, id }) {
+  const { data } = useQuery({
+    queryKey: ["person"],
+    queryFn: () =>
+      fetch(`http://localhost:3000/people/${id}`).then((res) => res.json()),
+  });
+
+  return (
+    <div className="detail">
+      <button onClick={onClose} type="button">
+        X
+      </button>
+      <h2>Informacje:</h2>
+      <h3>{data.name}</h3>
+      <h3>wiek: {data.age}</h3>
+      <h3>{data.email}</h3>
+    </div>
+  );
 }
