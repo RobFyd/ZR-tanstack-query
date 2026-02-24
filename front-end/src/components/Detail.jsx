@@ -18,6 +18,7 @@ export function Detail({ onClose, id }) {
         <p>Ładowanie...</p>
       ) : (
         <>
+          {" "}
           <h3>{data.name}</h3>
           <h3>wiek: {data.age}</h3>
           <h3>email: {data.email}</h3>
