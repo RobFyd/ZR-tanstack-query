@@ -6,6 +6,7 @@ export function Detail({ onClose, id }) {
     queryKey: ["person", id],
     queryFn: () =>
       fetch(`http://localhost:3000/people/${id}`).then((res) => res.json()),
+    staleTime: 1000 * 60 * 5, // 5 minut
   });
 
   console.log("render");
