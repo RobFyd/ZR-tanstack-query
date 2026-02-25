@@ -9,9 +9,6 @@ export function Detail({ onClose, id }) {
     staleTime: 1000 * 60 * 5, // 5 minut
   });
 
-  console.log("render");
-  console.log(id);
-
   return (
     <div className="detail">
       <button onClick={onClose} type="button">
