@@ -3,10 +3,13 @@ import "./Detail.css";
 
 export function Detail({ onClose, id }) {
   const { data, isPending } = useQuery({
-    queryKey: ["person"],
+    queryKey: ["person", id],
     queryFn: () =>
       fetch(`http://localhost:3000/people/${id}`).then((res) => res.json()),
   });
+
+  console.log("render");
+  console.log(id);
 
   return (
     <div className="detail">
