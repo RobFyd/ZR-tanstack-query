@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import "./Form.css";
 
 export function Form() {
@@ -8,6 +8,9 @@ export function Form() {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [age, setAge] = useState("");
+
+  const queryClient = useQueryClient();
+  queryClient.invalidateQueries(["people"]);
 
   const { mutate } = useMutation({
     mutationFn: (data) =>
