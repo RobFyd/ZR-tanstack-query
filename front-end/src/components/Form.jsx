@@ -41,7 +41,16 @@ export function Form() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     console.log({ name, email, age });
-    mutate({ name, email, age });
+    mutate(
+      { name, email, age },
+      {
+        onSettled: () => {
+          setName("");
+          setEmail("");
+          setAge("");
+        },
+      },
+    );
   };
 
   if (isPending) {
