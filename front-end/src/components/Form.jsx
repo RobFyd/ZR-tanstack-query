@@ -32,6 +32,9 @@ export function Form() {
     onError: (error) => {
       alert("Coś poszło nie tak: " + error.message);
     },
+    onSettled: () => {
+      setIsFormShown(false);
+    },
   });
 
   const handleSubmit = async (e) => {
