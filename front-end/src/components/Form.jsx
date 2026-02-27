@@ -11,7 +11,7 @@ export function Form() {
 
   const queryClient = useQueryClient();
 
-  const { mutate } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (data) =>
       fetch("http://localhost:3000/people", {
         method: "POST",
@@ -29,6 +29,10 @@ export function Form() {
     console.log({ name, email, age });
     mutate({ name, email, age });
   };
+
+  if (isPending) {
+    return <p>Dodawanie...</p>;
+  }
 
   return (
     <div>
