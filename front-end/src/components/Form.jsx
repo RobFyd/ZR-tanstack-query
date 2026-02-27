@@ -13,15 +13,25 @@ export function Form() {
 
   const { mutate, isPending } = useMutation({
     mutationFn: (data) =>
-      fetch("http://localhost:3000/people", {
+      fetch("http://localhost:3000/peoples", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
-      }).then(() => {
-        queryClient.invalidateQueries({ queryKey: ["people"] });
+      }).then((res) => {
+        if (res.ok) {
+          return res.json();
+        }
+
+        throw new Error("Nie udało się dodać osoby");
       }),
+    onSuccess: () => {
+      queryClient.invalidateQueries({ queryKey: ["people"] });
+    },
+    onError: (error) => {
+      alert("Coś poszło nie tak: " + error.message);
+    },
   });
 
   const handleSubmit = async (e) => {
