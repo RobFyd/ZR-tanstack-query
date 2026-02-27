@@ -10,7 +10,6 @@ export function Form() {
   const [age, setAge] = useState("");
 
   const queryClient = useQueryClient();
-  queryClient.invalidateQueries(["people"]);
 
   const { mutate } = useMutation({
     mutationFn: (data) =>
@@ -20,6 +19,8 @@ export function Form() {
           "Content-Type": "application/json",
         },
         body: JSON.stringify(data),
+      }).then(() => {
+        queryClient.invalidateQueries({ queryKey: ["people"] });
       }),
   });
 
