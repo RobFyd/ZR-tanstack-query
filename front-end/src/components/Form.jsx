@@ -30,12 +30,6 @@ export function Form() {
       const peopleData = queryClient.getQueryData(["people"]);
       queryClient.setQueryData(["people"], [...peopleData, res]);
     },
-    onError: (error) => {
-      alert("Coś poszło nie tak: " + error.message);
-    },
-    onSettled: () => {
-      setIsFormShown(false);
-    },
   });
 
   const handleSubmit = async (e) => {
@@ -44,7 +38,12 @@ export function Form() {
     mutate(
       { name, email, age },
       {
+        onError: (error) => {
+          alert("Coś poszło nie tak: " + error.message);
+        },
         onSettled: () => {
+          setIsFormShown(false);
+
           setName("");
           setEmail("");
           setAge("");
